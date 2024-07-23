@@ -1,0 +1,25 @@
+.landing-section {
+  background-image: url("../images/bg.jpg");
+  background-size: cover;
+  height: 95vh;
+  opacity: 0.99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.landing-section h1 {
+  font-family: Poppins, sans-serif;
+}
+.card {
+  background-color: #2f2c37b9;
+  width: 50%;
+  color: white;
+  height: 200px;
+  text-align: center;
+}
+.card div {
+  text-align: center;
+  width: 250px;
+}
+.card h1 {
+}
