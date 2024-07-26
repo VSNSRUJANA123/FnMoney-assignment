@@ -1,25 +1,45 @@
 .landing-section {
   background-image: url("../images/bg.jpg");
   background-size: cover;
-  height: 95vh;
+  padding: 20px;
   opacity: 0.99;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
 }
 .landing-section h1 {
   font-family: Poppins, sans-serif;
 }
 .card {
-  background-color: #2f2c37b9;
-  width: 50%;
+  background-color: #2f2c37cc;
+  width: 300px;
   color: white;
   height: 200px;
   text-align: center;
+  padding: 20px;
+}
+.card h1 {
+  font-size: 30px;
+  padding: 20px;
+  padding-top: 0;
 }
 .card div {
   text-align: center;
-  width: 250px;
 }
-.card h1 {
+.get-started {
+  margin-top: 10px;
+  padding: 10px;
+  cursor: pointer;
+  width: 150px;
+  background-color: #152f46;
+  color: white;
+  border: none;
+  border-radius: 7px;
+}
+@media (max-width: 321px) {
+  .card {
+    width: 250px;
+    height: 250px;
+  }
 }

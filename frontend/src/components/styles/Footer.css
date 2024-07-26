@@ -1,0 +1,19 @@
+.footer-section {
+  margin: 15px;
+  padding: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  background-color: #2f2e3cba;
+  overflow: hidden;
+  color: white;
+  box-shadow: #2f2e3cba 0px 54px 55px, #2f2e3cba 0px -12px 30px,
+    #2f2e3cba 0px 4px 6px, #2f2e3cba 0px 12px 13px, #2f2e3cba 0px -3px 5px;
+}
+.footer-section li {
+  margin: 15px;
+}
+.footer-section li p {
+  margin-bottom: 10px;
+}

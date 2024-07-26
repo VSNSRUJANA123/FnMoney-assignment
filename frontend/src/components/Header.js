@@ -10,7 +10,9 @@ const Header = () => {
   };
   return (
     <header className="header">
-      <h1 className="logo">FnMoney</h1>
+      <Link to="/" className="link">
+        <h1 className="logo">FnMoney</h1>
+      </Link>
       <span onClick={menubar} className="menu">
         <IoMenu />
       </span>
@@ -21,6 +23,7 @@ const Header = () => {
         <Link to="/about" className="link">
           <li>About</li>
         </Link>
+        <li>Heros</li>
         <Link to="/assessments" className="link">
           <li>Assessments</li>
         </Link>

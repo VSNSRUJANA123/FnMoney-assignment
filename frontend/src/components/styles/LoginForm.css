@@ -1,0 +1,17 @@
+.login-section {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.login-title {
+  font-family: "Poppins", sans-serif;
+  padding-bottom: 10px;
+  margin: 20px;
+}
+.login-section input {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.login-section button {
+  width: 150px;
+}

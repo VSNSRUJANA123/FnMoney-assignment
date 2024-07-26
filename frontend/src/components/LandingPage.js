@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import "./styles/landingpage.css";
-import background from "./images/bg.jpg";
+import Footer from "./Footer";
+import { Link } from "react-router-dom";
 class LandingPage extends Component {
   render() {
     return (
@@ -9,11 +10,15 @@ class LandingPage extends Component {
         <Header />
         <section className="landing-section">
           <div className="card">
+            <h1>Welcome to FnMoney Full Stack Internship</h1>
+            <p>Internship Assignment</p>
             <div>
-              <h1>Welcome to FnMoney Full Stack Internship</h1>
+              <Link to="/login">
+                <button className="get-started">Get Started</button>
+              </Link>
             </div>
-            <button className="">Get Started</button>
           </div>
+          <Footer />
         </section>
       </div>
     );

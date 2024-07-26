@@ -6,12 +6,13 @@
   background-color: #152f46;
   color: white;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 10px;
+  justify-content: space-between;
 }
 .logo {
   font-family: "Courier New", Courier, monospace;
+  margin-right: 30px;
 }
 nav {
   display: flex;
@@ -29,12 +30,17 @@ nav .link {
   font-weight: 500;
   text-decoration: none;
 }
+.link {
+  text-decoration: none;
+  color: white;
+}
 .menu {
   display: none;
 }
 @media (max-width: 476px) {
   .header {
     position: relative;
+    justify-content: space-between;
   }
   .navbar {
     top: 0;
@@ -47,14 +53,17 @@ nav .link {
     padding: 10px;
     opacity: 0;
     transition: opacity 0.5s;
+    display: none;
+    width: 50%;
   }
   .navbar li {
     margin-bottom: 10px;
   }
   .close-nav {
+    display: block;
     opacity: 1;
   }
   .menu {
-    display: block;
+    display: inline-block;
   }
 }

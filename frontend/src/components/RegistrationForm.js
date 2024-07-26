@@ -1,48 +1,86 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-
-class RegistrationForm extends Component {
-  state = { username: "", password: "" };
-
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  handleSubmit = async (event) => {
+import Header from "./Header";
+import { URL } from "../url";
+import { Link, useNavigate } from "react-router-dom";
+import "./styles/LoginForm.css";
+function RegistrationForm() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const { username, password } = this.state;
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/users/register",
-        { username, password }
-      );
-      console.log(response.data);
+      const response = await axios.post(`${URL}/api/users/register`, {
+        username,
+        password,
+      });
+      setSuccess("Registration successful. You can now log in.");
+      setError("");
+      setUsername("");
+      setPassword("");
+      setConfirmPassword("");
+      navigate("/login");
     } catch (error) {
-      console.error(error);
+      setError("Registration failed. Please try again.");
+      console.error("Error during registration:", error);
     }
   };
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          onChange={this.handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={this.handleChange}
-          required
-        />
-        <button type="submit">Register</button>
-      </form>
-    );
-  }
+  return (
+    <div>
+      <Header />
+      <div>
+        <h2
+          className="login-title"
+          style={{ margin: "10px", marginLeft: "20px" }}
+        >
+          Register Form
+        </h2>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {success && (
+          <p style={{ color: "green", marginLeft: "20px" }}>{success}</p>
+        )}
+        <form onSubmit={handleSubmit} className="login-section">
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+            required
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm Password"
+            required
+          />
+          <button className="get-started" type="submit">
+            Register
+          </button>
+          <p style={{ marginTop: "10px" }}>
+            Already have an account <Link to="/login">Login here</Link>
+          </p>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default RegistrationForm;

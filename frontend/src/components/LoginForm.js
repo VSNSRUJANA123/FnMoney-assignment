@@ -1,48 +1,68 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import Header from "./Header";
+import "./styles/LoginForm.css";
+import { URL } from "../url";
+function LoginForm() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-class LoginForm extends Component {
-  state = { username: "", password: "" };
-
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const { username, password } = this.state;
+
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/login",
-        { username, password }
+        `${URL}/api/users/login`,
+        { username, password },
+        { withCredentials: true }
       );
-      console.log(response.data);
+
+      if (response.data.token) {
+        localStorage.setItem("authToken", response.data.token);
+        navigate("/assessments");
+      } else {
+        setError("Failed to log in. Please try again.");
+      }
     } catch (error) {
-      console.error(error);
+      setError("Login failed. Please check your username and password.");
+      console.error("Error during login:", error);
     }
   };
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          onChange={this.handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={this.handleChange}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-    );
-  }
+  return (
+    <div>
+      <Header />
+      <div>
+        <h2 className="login-title">Login</h2>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <form onSubmit={handleSubmit} className="login-section">
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+            required
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
+          <button className="get-started" type="submit">
+            Login
+          </button>
+        </form>
+        <p style={{ margin: "10px" }}>
+          create a user <Link to="/register">Register here</Link>
+        </p>
+      </div>
+    </div>
+  );
 }
 
 export default LoginForm;
